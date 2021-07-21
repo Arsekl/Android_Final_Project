@@ -89,26 +89,28 @@ public class MainActivity extends AppCompatActivity {
         }
         File pic = new File(PicDirname + videoMessage.getPicName());
         if (pic.exists()) {
-            pic.delete();
-        }
-        byte[] bytes = new byte[1024];
-        int len;
-        try {
-            URL url = new URL(videoMessage.getAvaTorUrl());
-            InputStream inputStream = url.openStream();
-            OutputStream outputStream = new FileOutputStream(pic);
-            while ((len = inputStream.read(bytes)) != -1) {
-                outputStream.write(bytes, 0, len);
-            }
-            inputStream.close();
-            outputStream.close();
             return FILE_DOWNLOAD_SUCCESS;
-        } catch (MalformedURLException e) {
-            return FILE_DOWNLOAD_FAILED;
-        } catch (FileNotFoundException e) {
-            return FILE_DOWNLOAD_FAILED;
-        } catch (IOException e) {
-            return FILE_DOWNLOAD_FAILED;
+        }
+        else {
+            byte[] bytes = new byte[1024];
+            int len;
+            try {
+                URL url = new URL(videoMessage.getAvaTorUrl());
+                InputStream inputStream = url.openStream();
+                OutputStream outputStream = new FileOutputStream(pic);
+                while ((len = inputStream.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, len);
+                }
+                inputStream.close();
+                outputStream.close();
+                return FILE_DOWNLOAD_SUCCESS;
+            } catch (MalformedURLException e) {
+                return FILE_DOWNLOAD_FAILED;
+            } catch (FileNotFoundException e) {
+                return FILE_DOWNLOAD_FAILED;
+            } catch (IOException e) {
+                return FILE_DOWNLOAD_FAILED;
+            }
         }
     }
 

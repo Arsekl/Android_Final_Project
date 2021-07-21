@@ -103,7 +103,9 @@ public class ViewPageActivity extends AppCompatActivity {
                         videoView.pause();
                         break;
                     case ViewPager2.SCROLL_STATE_IDLE:
+                        break;
                     case ViewPager2.SCROLL_STATE_SETTLING:
+                        videoView.start();
                         break;
                 }
             }
